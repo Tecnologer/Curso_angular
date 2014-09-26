@@ -1,0 +1,2 @@
+Lectura de servicios y scopes:
+	- http://raulexposito.com/documentos/como-aprender-angularjs/

@@ -1,0 +1,41 @@
+<html ng-app="curso">
+	<head>
+		<script type="text/javascript" src="js/angular.min.js"></script>
+		<script type="text/javascript" src="js/ui-bootstrap-tpls-0.11.0.min.js"></script>
+		<script type="text/javascript" src="js/funciones_ajax.js"></script>
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+	</head>
+	<body  ng-controller="ciudades">
+		<label>{{ac_ciudad}}</label>
+		<div style="margin-left:15px;">
+			<input type="text" style="margin-top:5px;" ng-model="nb_estado" placeholder="Nombre Estado"><br>
+			<input type="text" style="margin-top:5px;" ng-model="nb_ciudad" placeholder="Nombre Ciudad"><br>
+			<button class="btn btn-success" style="margin-top:5px;" ng-click="guardar()">Guardar</button>
+		</div>
+		<br><br>
+		<div  style="margin-left:15px;" ng-controller="cdListar">
+			Filtros:<br>
+			<input type="text" ng-model="txt_filtro" placeholder="Filtrar" style="width:350px">
+			<button class="btn btn-primary" ng-click="buscar()">Buscar</button>
+			<br>
+			<br>
+			<!-- <input type="checkbox" ng-model="check">Mostrar Tabla de Ciudades -->
+			<button ng-click="mostrar()" class="btn btn-danger">{{lbl}}</button>
+			<table style="width:500px;" ng-show="check">
+				<tr>
+					<th style="cursor:pointer;" ng-click="ordenado='nb_estado'">Estado</th>
+					<th style="cursor:pointer;" ng-click="ordenado='nb_ciudad'">Ciudad</th>
+					<th>Acciones</th>
+				</tr>
+				<tr ng-repeat="ciudad in ciudades | filter: txt_filtro | orderBy: ordenado">
+					<td>{{ciudad.NB_ESTADO}}</td>
+					<td>{{ciudad.NB_CIUDAD}}</td>
+					<td>
+						<img style="cursor:pointer;" src="img/edit.png" width="25px" height="25px" ng-click="editar(ciudad)">
+						<img style="cursor:pointer;" src="img/delete.png" width="25px" height="25px" ng-click="eliminar(ciudad)">
+					</td>
+				</tr>
+			</table>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,100 @@
+<html ng-app="empresas">
+	<head>
+		<title>Empresas</title>
+		<script type="text/javascript" src="js/angular.min.js"></script>
+		<script type="text/javascript" src="js/ui-bootstrap-tpls-0.11.0.min.js"></script>
+		<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+		<script type="text/javascript" src="js/ng-grid.js"></script>
+		<script type="text/javascript" src="js/empresas.js"></script>
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="css/flat-ui.css">
+		<link rel="stylesheet" type="text/css" href="css/ng-grid.css">
+	</head>
+	<body ng-controller="nuevo">
+		<table style="margin-left:15px;margin-top:5px;" cellspacing="10px" cellpadding="5">
+			<tr>
+				<td colspan="2">{{titulo}}</td>
+			</tr>
+			<tr>
+				<td align="right" class="control-label">Empresa:</td>
+				<td align="left">
+					<input type="text" 
+						   class="form-control" 
+						   placeholder="Nombre de empresa" 
+						   id="nb_empresa" 
+						   ng-model="nb_empresa">
+				</td>
+			</tr>
+			<tr>
+				<td align="right" style="vertical-align:top;">Direcci&oacute;n:</td>
+				<td align="left">
+					<input type="text" 
+						   class="form-control" 
+						   placeholder="Calle y n&uacute;mero" 
+						   ng-model="de_direccion1">
+					<input type="text" 
+						   class="form-control" 
+						   placeholder="Colonia y ciudad" 
+						   ng-model="de_direccion2">
+				</td>
+			</tr>
+			<tr>
+				<td align="right">Telefono:</td>
+				<td align="left">
+					<input type="text" 
+						   class="form-control" 
+						   placeholder="Numero de telefono" 
+						   ng-model="nu_telefono">
+				</td>
+			</tr>
+			<tr>
+				<td align="right">C.P.:</td>
+				<td align="left">
+					<input type="text"
+					       class="form-control" 
+						   placeholder="Codigo postal" 
+						   ng-model="nu_cp">
+				</td>
+			</tr>
+			<tr>
+				<td align="center" colspan="2">
+					<button class="btn btn-success" ng-click="guardar()">Guardar</button>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2">
+					 <alert ng-repeat="alert in alerts" type="{{alert.type}}" >{{alert.msg}}</alert>
+				</td>
+			</tr>
+		</table>
+		<!-- <select ng-options="empresa.NB_EMPRESA for empresa in empresas">
+			<option value="">Seleccionar</option>
+		</select>
+		<select ng-model="id_empresa" >
+			<option value="">Seleccionar</option>
+			<option ng-repeat="empresa in empresas" VALUE="{{empresa.ID_EMPRESA}}">{{empresa.NB_EMPRESA}}</option>
+		</select> -->
+		<br>
+		<button class="btn btn-primary btn-lg" ng-click="listar()">Buscar</button>
+		<br><br>
+		<table width="60%" class="table table-hover">
+			<tr>
+				<th>Empresa</th>
+				<th>Direcci&oacute;n</th>
+				<th>Telefono</th>
+				<th>Acciones</th>
+			</tr>
+			<tr ng-repeat="empresa in empresas">
+				<td>{{empresa.NB_EMPRESA}}</td>
+				<td>{{empresa.DE_DIRECCION}} CP: {{empresa.NU_CODIGOPOSTAL}}</td>
+				<td>{{empresa.NU_TELEFONO}}</td>
+				<td>
+					<img src="img/edit.png" style="width:25px;height:25px;cursor:pointer;" ng-click="editar(empresa)">
+					<img src="img/delete.png" style="width:25px;height:25px;cursor:pointer;" ng-click="eliminar(empresa)">
+				</td>
+			</tr>
+		</table>
+		<!-- <h3>NG-GRID</h3>
+		<div class="gridStyle" ng-grid="gridOptions"></div> -->
+	</body>
+</html>
