@@ -45,11 +45,24 @@
 	</cffunction>
 
 	<cffunction name="listar" access="remote" returntype="Struct">
+		<cfargument name="id_empresa" type="string" required="true"/>
+		<cfargument name="nb_empresa" type="string" required="true"/>
 
 		<cfset Local.BR=structNew()>
 
+		<cfset Local.params=structNew()>
+
+		<cfif Arguments.id_empresa NEQ ''>
+			<cfset Local.params.id_empresa=Arguments.id_empresa>
+		</cfif>
+		
+		<cfif Arguments.nb_empresa NEQ ''>
+			<cfset Local.params.nb_empresa=Arguments.nb_empresa>
+		</cfif>
+
 		<cfinvoke component="Curso_angular.componentes.DAO.empresas"
 				  method="listar"
+				  argumentcollection="#Local.params#"
 				  returnvariable="Local.rs">
 
 		

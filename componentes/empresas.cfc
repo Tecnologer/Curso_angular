@@ -34,12 +34,15 @@
 	</cffunction>
 
 	<cffunction name="listar" access="remote" returnformat="JSON">
+		<cfargument name="id_empresa" type="string" required="true"/>
+		<cfargument name="nb_empresa" type="string" required="true"/>
 
 		<cftransaction>
 			<cftry>
 
 				<cfinvoke component="Curso_angular.componentes.BRO.empresas"
 						  method="listar"
+						  argumentcollection="#arguments#"
 						  returnvariable="Local.BRO"/>				
 
 				<cfif Local.BRO.hasError>

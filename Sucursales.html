@@ -1,0 +1,20 @@
+<html ng-app="sucursales">
+	<head>
+		<title></title>
+		<script type="text/javascript" src="js/angular.min.js"></script>
+		<script type="text/javascript" src="js/ui-bootstrap-tpls-0.11.0.min.js"></script>
+		<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+		<script type="text/javascript" src="js/ng-grid.js"></script>
+		<script type="text/javascript" src="js/Services/empresas.js"></script>
+		<script type="text/javascript" src="js/sucursales.js"></script>
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="css/flat-ui.css">
+		<link rel="stylesheet" type="text/css" href="css/ng-grid.css">
+	</head>
+	<body ng-controller="body">
+		<select ng-model="id_empresa">
+			<option value="">Seleccionar</option>
+			<option ng-repeat="empresa in empresas" value="{{empresa.ID_EMPRESA}}">{{empresa.NB_EMPRESA}}</option>
+		</select>
+	</body>
+</html>

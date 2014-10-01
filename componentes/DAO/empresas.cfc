@@ -32,9 +32,13 @@
 	</cffunction>
 
 	<cffunction name="listar" access="public" returntype="query">
+		<cfargument name="id_empresa" type="string" required="false"/>
+		<cfargument name="nb_empresa" type="string" required="false"/>
 
 		<cfquery name="Local.rs" datasource="cnx_petroil">
-			EXEC upL_Empresas
+			EXEC upL_Empresas 
+			<cfif isDefined("Arguments.id_empresa")>#Arguments.id_empresa#<cfelse>NULL</cfif>,
+			<cfif isDefined("Arguments.nb_empresa")>'#Arguments.nb_empresa#'<cfelse>NULL</cfif>
 		</cfquery>
 
 		<cfreturn Local.rs>

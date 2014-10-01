@@ -6,28 +6,35 @@
 		<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
 		<script type="text/javascript" src="js/ng-grid.js"></script>
 		<script type="text/javascript" src="js/empresas.js"></script>
+		<script type="text/javascript" src="js/Services/empresas.js"></script>
 		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="css/flat-ui.css">
 		<link rel="stylesheet" type="text/css" href="css/ng-grid.css">
 	</head>
-	<body ng-controller="nuevo">
-		<table style="margin-left:15px;margin-top:5px;" cellspacing="10px" cellpadding="5">
-			<tr>
-				<td colspan="2">{{titulo}}</td>
-			</tr>
-			<tr>
-				<td align="right" class="control-label">Empresa:</td>
-				<td align="left">
+	<body ng-controller="nuevo" id="nuevo">
+		<button class="btn btn-sm"  ng-click="openModal('550','Agregar empresa')">
+			<img src="img/add.png" width="25px" height="25px">
+			Agregar
+		</button>
+		<div style="width:30%;">
+			<alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert(0)">{{alert.msg}}</alert>
+		</div>
+		<!-- MODAL -->
+  		<script type="text/ng-template" id="myModalContent.html">
+		    <div class="modal-header">
+		    <h4 class="modal-title">{{modalTitle}}</h4>
+		    </div>
+		    <div class="modal-body" id="modal-body">
+		        <div style="margin-top:5px;">
+		          	Empresa:
 					<input type="text" 
 						   class="form-control" 
 						   placeholder="Nombre de empresa" 
 						   id="nb_empresa" 
 						   ng-model="nb_empresa">
-				</td>
-			</tr>
-			<tr>
-				<td align="right" style="vertical-align:top;">Direcci&oacute;n:</td>
-				<td align="left">
+				</div>
+				<div style="margin-top:5px;">
+					Direcci&oacute;n:
 					<input type="text" 
 						   class="form-control" 
 						   placeholder="Calle y n&uacute;mero" 
@@ -36,48 +43,57 @@
 						   class="form-control" 
 						   placeholder="Colonia y ciudad" 
 						   ng-model="de_direccion2">
-				</td>
-			</tr>
-			<tr>
-				<td align="right">Telefono:</td>
-				<td align="left">
+				</div>
+				<div style="margin-top:5px;">
+					Telefono:
 					<input type="text" 
 						   class="form-control" 
 						   placeholder="Numero de telefono" 
 						   ng-model="nu_telefono">
-				</td>
-			</tr>
-			<tr>
-				<td align="right">C.P.:</td>
-				<td align="left">
+				</div>
+				<div style="margin-top:5px;">
+					Codigo Postal:
 					<input type="text"
 					       class="form-control" 
 						   placeholder="Codigo postal" 
 						   ng-model="nu_cp">
-				</td>
-			</tr>
+				</div>
+				<div style="margin-top:10px;text-align: center;">
+					<button class="btn btn-success" ng-click="save()">Guardar</button>
+				</div>
+				<alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert(0)">{{alert.msg}}</alert>
+	        </div>
+	        <div class="modal-footer">
+	            <!-- <button class="btn btn-primary" ng-click="ok()">OK</button> -->
+	            <button class="btn btn-warning" ng-click="cancel()">Cerrar</button>
+	        </div>
+	    </script>
+
+		<br>
+		<table>
 			<tr>
-				<td align="center" colspan="2">
-					<button class="btn btn-success" ng-click="guardar()">Guardar</button>
+				<td>
+					Clave:
+					<input type="text"
+					       class="form-control" 
+						   placeholder="Clave de empresa" 
+						   ng-model="id_empresa"
+						   style="width:250px;">
 				</td>
-			</tr>
-			<tr>
-				<td colspan="2">
-					 <alert ng-repeat="alert in alerts" type="{{alert.type}}" >{{alert.msg}}</alert>
+				<td>
+					Nombre:
+					<input type="text"
+					       class="form-control" 
+						   placeholder="Nombre de empresa" 
+						   ng-model="nb_empresaFiltro"
+						   style="width:250px;">
+				</td>
+				<td>
+					<button class="btn btn-primary btn-lg" ng-click="listar()">Buscar</button>
 				</td>
 			</tr>
 		</table>
-		<!-- <select ng-options="empresa.NB_EMPRESA for empresa in empresas">
-			<option value="">Seleccionar</option>
-		</select>
-		<select ng-model="id_empresa" >
-			<option value="">Seleccionar</option>
-			<option ng-repeat="empresa in empresas" VALUE="{{empresa.ID_EMPRESA}}">{{empresa.NB_EMPRESA}}</option>
-		</select> -->
-		<br>
-		<button class="btn btn-primary btn-lg" ng-click="listar()">Buscar</button>
-		<br><br>
-		<table width="60%" class="table table-hover">
+		<!-- <table width="60%" class="table table-hover">
 			<tr>
 				<th>Empresa</th>
 				<th>Direcci&oacute;n</th>
@@ -93,8 +109,9 @@
 					<img src="img/delete.png" style="width:25px;height:25px;cursor:pointer;" ng-click="eliminar(empresa)">
 				</td>
 			</tr>
-		</table>
-		<!-- <h3>NG-GRID</h3>
-		<div class="gridStyle" ng-grid="gridOptions"></div> -->
+		</table> -->
+		<h3>NG-GRID</h3>
+		<div class="gridStyle" ng-grid="gridOptions"></div>
+
 	</body>
 </html>
